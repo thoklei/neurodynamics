@@ -130,8 +130,8 @@ dmypy.json
 
 # apple stuff
 **/.DS_Store
+.vscode/
 
 # manim stuff
-
 # ignoring outputs
 media/
