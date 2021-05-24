@@ -12,10 +12,10 @@ class Analytics(Scene):
         self.wait()
 
         x_formula = MathTex(
-            "\\dot{x}=","x(t)(2-x(t)-y(t)"
+            "\\dot{x}=","x(t)(2-x(t)-y(t))"
         )
         x_zero = MathTex(
-            "0=","x(t)","(2-x(t)-y(t)"
+            "0=","x(t)","(2-x(t)-y(t))"
         )
 
         y_formula = MathTex(
@@ -35,7 +35,7 @@ class Analytics(Scene):
             LaggedStart(FadeInFrom(x_formula, DOWN)),
             LaggedStart(FadeInFrom(y_formula, DOWN))
         )
-        self.wait()
+        self.wait(25)
 
         transform_title = Tex("Analytic Solution:")
         transform_title.to_corner(UP + LEFT)
@@ -44,11 +44,11 @@ class Analytics(Scene):
             LaggedStart(FadeOutAndShift(y_formula, direction=DOWN)),
         )
 
-        self.wait()
+        self.wait(5)
         
         # explain how first diff eq can be zero
 
-        def display_analytic_solutions(formula, zero, sol_tex1, sol_tex2):
+        def display_analytic_solutions(formula, zero, sol_tex1, sol_tex2, w1, w2, w3):
             framebox1 = SurroundingRectangle(zero[1], buff = .1)
             framebox2 = SurroundingRectangle(zero[2], buff = .1)
             sol1 = MathTex(sol_tex1)
@@ -59,19 +59,19 @@ class Analytics(Scene):
             self.play(
                 Transform(formula, zero)
             )
-            self.wait()
+            self.wait(w1)
 
             self.play(
                 Create(framebox1),
                 LaggedStart(Write(sol1))
             )
-            self.wait()
+            self.wait(w2)
 
             self.play(
                 ReplacementTransform(framebox1,framebox2),
                 LaggedStart(Write(sol2))
             )
-            self.wait()
+            self.wait(w3)
 
             # clear screen
             self.play(
@@ -83,15 +83,15 @@ class Analytics(Scene):
                 FadeOut(framebox2)
             )
         
-        display_analytic_solutions(x_formula, x_zero, "x(t) = 0", "y(t) = 2 - x(t)")
+        display_analytic_solutions(x_formula, x_zero, "x(t) = 0", "y(t) = 2 - x(t)", 10, 10, 25)
         self.wait()
         y_formula.shift(UP)
         self.play(
             FadeInFrom(y_formula, DOWN)
         )
-        self.wait()
-        display_analytic_solutions(y_formula, y_zero, "y(t) = 0", "x(t) = 1")
-        self.wait()
+        self.wait(2)
+        display_analytic_solutions(y_formula, y_zero, "y(t) = 0", "x(t) = 1", 5, 3, 5)
+        self.play(FadeOut(title), FadeOut(transform_title))
 
 
         # explain how second formula can be zero
