@@ -94,16 +94,6 @@ class Nullclines(Scene):
         ])
 
         
-
-        # func1 = lambda t: 0
-        # graph1 = number_plane.get_graph(func1 , x_min=-5, x_max=5)
-
-        # func2 = lambda t: 2 - t
-        # #graph2 = number_plane.get_graph(func2 , x_min=-5, x_max=5)
-
-        # # func3 = lambda t: t
-        # # graph3 = 
-        
         # create number plane
         self.play(
             Create(self.number_plane)
