@@ -121,7 +121,7 @@ class FixedPointsAnalytics(Scene):
 
         self.play(Write(title))
 
-        self.wait(2)
+        self.wait(5)
 
         transform_title = Tex("Fixed points:")
         transform_title.to_corner(UP + LEFT)
@@ -219,7 +219,6 @@ class FixedPointsAnalytics(Scene):
         self.fixed_point3()
 
         self.wait(2)
-        self.fixed_point4()
 
 
     def fixed_point1(self):
@@ -245,12 +244,14 @@ class FixedPointsAnalytics(Scene):
             FadeIn(fixed_point1_y1)
         )
 
+        self.wait(2)
+
         self.play(
             Transform(fixed_point1_x1, fixed_point1_x2),
             Transform(zero_copy, fixed_point1_x2[0])
         )
 
-        self.wait()
+        self.wait(3)
 
         fixed_point1_x3 = MathTex(
             "x(t)", "=", "2"
@@ -270,14 +271,14 @@ class FixedPointsAnalytics(Scene):
             Transform(fixed_point1_x2, fixed_point1_x3)
         )
 
-        self.wait()
+        self.wait(2)
 
         self.play(
             Transform(fixed_point1_y1, fixed_point1_y2),
             Transform(two_copy, fixed_point1_y2[1])
         )
         
-        self.wait()
+        self.wait(4)
 
         fixed_point1 = MathTex(
             "(", "2", ",", "0", ")",
@@ -308,7 +309,7 @@ class FixedPointsAnalytics(Scene):
         #     "y(t)", " = ", "2 - ", "1"
         # )
         fixed_point2_x2 = Tex(
-            "$y(t)", " = ", "2 - ", "1$", tex_environment='flushleft'
+            "y(t)", " = ", "2 - ", "1"#, tex_environment='flushleft'
         )
         fixed_point2_x2.shift(3*LEFT)
 
@@ -333,7 +334,7 @@ class FixedPointsAnalytics(Scene):
         self.wait()
         
         fixed_point2_x3 = Tex(
-            "$y(t)", "=", "1$", tex_environment='fushleft'
+            "y(t)", "=", "1"#, tex_environment='flushleft'
         )
         fixed_point2_x3.shift(3*LEFT)
 
@@ -406,5 +407,3 @@ class FixedPointsAnalytics(Scene):
             FadeOut(fixed_point3_x1),
             FadeOut(fixed_point3_y1)
         )
-
-    def fixed_point4(self):
