@@ -407,3 +407,35 @@ class FixedPointsAnalytics(Scene):
             FadeOut(fixed_point3_x1),
             FadeOut(fixed_point3_y1)
         )
+        
+    def fixed_point4(self):
+        fixed_point4_x1 = MathTex(
+            "x(t)", " = ", "0"
+        )
+        fixed_point4_x1.shift(3*LEFT)
+
+        fixed_point4_y1 = MathTex(
+            "x(t)", " = ", "1"
+        )
+        fixed_point4_y1.shift(3*RIGHT)
+
+        self.play(
+            FadeIn(fixed_point4_x1),
+            FadeIn(fixed_point4_y1)
+        )
+
+        error = Tex("X", color=RED)
+
+        self.wait()
+        
+        self.play(
+            FadeIn(error)
+        )
+
+        self.wait(2)
+
+        self.play(
+            FadeOut(fixed_point4_x1),
+            FadeOut(fixed_point4_y1),
+            FadeOut(error)
+        )
