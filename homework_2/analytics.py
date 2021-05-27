@@ -119,6 +119,8 @@ class FixedPointsAnalytics(Scene):
             "x(t)", " = ", "1"
         )
 
+        self.wait()
+
         self.play(Write(title))
 
         self.wait(5)
@@ -212,13 +214,14 @@ class FixedPointsAnalytics(Scene):
         self.wait()
         self.fixed_point1()
 
-        self.wait(2)
+        self.wait(6)
         self.fixed_point2()
 
         self.wait(2)
         self.fixed_point3()
 
         self.wait(2)
+        self.fixed_point4()
 
 
     def fixed_point1(self):
@@ -251,7 +254,7 @@ class FixedPointsAnalytics(Scene):
             Transform(zero_copy, fixed_point1_x2[0])
         )
 
-        self.wait(3)
+        self.wait(5)
 
         fixed_point1_x3 = MathTex(
             "x(t)", "=", "2"
@@ -324,14 +327,14 @@ class FixedPointsAnalytics(Scene):
             FadeIn(fixed_point2_y1)
         )
 
-        self.wait()
+        self.wait(3)
 
         self.play(
             Transform(fixed_point2_x1, fixed_point2_x2),
             Transform(one_copy, fixed_point2_x2[3])
         )
 
-        self.wait()
+        self.wait(4)
         
         fixed_point2_x3 = Tex(
             "y(t)", "=", "1"#, tex_environment='flushleft'
@@ -344,7 +347,7 @@ class FixedPointsAnalytics(Scene):
             Transform(fixed_point2_x2, fixed_point2_x3)
         )
 
-        self.wait()
+        self.wait(2)
 
         fixed_point2 = MathTex(
             "(", "1", ",", "1", ")",
@@ -393,15 +396,20 @@ class FixedPointsAnalytics(Scene):
             FadeIn(fixed_point3_y1)
         )
 
-        self.wait()
+        self.wait(2)
 
         self.play(
             FadeIn(fixed_point3),
-            Transform(zero_copy, fixed_point3[1]),
+            Transform(zero_copy, fixed_point3[1])  
+        )
+
+        self.wait(2)
+
+        self.play(
             Transform(one_copy, fixed_point3[3])
         )
 
-        self.wait()
+        self.wait(2)
 
         self.play(
             FadeOut(fixed_point3_x1),
@@ -439,3 +447,5 @@ class FixedPointsAnalytics(Scene):
             FadeOut(fixed_point4_y1),
             FadeOut(error)
         )
+
+        self.wait(10)
