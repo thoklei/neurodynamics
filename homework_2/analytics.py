@@ -400,12 +400,7 @@ class FixedPointsAnalytics(Scene):
 
         self.play(
             FadeIn(fixed_point3),
-            Transform(zero_copy, fixed_point3[1])  
-        )
-
-        self.wait(2)
-
-        self.play(
+            Transform(zero_copy, fixed_point3[1]),
             Transform(one_copy, fixed_point3[3])
         )
 
