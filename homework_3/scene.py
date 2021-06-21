@@ -100,10 +100,11 @@ class RandomTrajectory(Scene):
             FadeOut(questions)
         )
 
-    def define(self, word, definition):
+    def define(self, word, definition, focus):
         heteroclinic = Tex(word)
-        hetero_def = Tex(definition)
+        hetero_def = Tex(*definition)
         hetero_def.shift(DOWN)
+        framebox = SurroundingRectangle(hetero_def[focus], buff = .1)
         hetero = VGroup(heteroclinic, hetero_def)
 
         self.play(
@@ -117,8 +118,13 @@ class RandomTrajectory(Scene):
         self.wait()
 
         self.play(
+            Create(framebox)
+        )
+
+        self.play(
             FadeOut(hetero_def),
-            FadeOut(heteroclinic)
+            FadeOut(heteroclinic),
+            FadeOut(framebox)
         )
     
     def construct(self):
@@ -144,16 +150,46 @@ class RandomTrajectory(Scene):
             0.0
         ])
 
-        self.show_vec_field(vec_field_func, 1, -2, 1)
+        circular_vec_fied_func = lambda t: np.array([
+            -1.0 * np.sin(PI/2.0 * t[1]),
+            np.sin(PI/2.0 * t[0]),
+            0
+        ])
 
-        self.show_vec_field(vec_field_func2, 1, 5, 1)
+
+        def pendulum_vector_field_func(point, mu=0.1, g=9.8, L=3):
+            theta, omega = point[:2]
+            return np.array([
+                omega,
+                -np.sqrt(g / L) * np.sin(theta), #- mu * omega, # removing air resistance because that wouldn't work
+                0,
+            ])
+
+        def pendulum_field_func(point):
+            x, y = self.numberplane.point_to_coords(point)
+            mu, g, L = [0.2, 4.9, 1.6]
+                #big_pendulum_config[key]
+                #for key in ["damping", "gravity", "length"]
+            #]
+            return pendulum_vector_field_func(
+                x * RIGHT + y * UP,
+                mu=mu, g=g, L=L
+            )
+
+        #self.show_vec_field(vec_field_func, 1, -2, 1)
+
+        #self.show_vec_field(vec_field_func2, 1, 5, 1)
+
+        #self.show_vec_field(circular_vec_fied_func, 5, 1, 0)
+
+        self.show_vec_field(pendulum_field_func, 5, -PI, 0.001)
 
         self.play(
             FadeOut(self.numberplane)
         )
 
-        self.define("heteroclinic", "starts and ends in different equilibria")
-        self.define("homoclinic", "starts and ends in the same equilibrium")
+        self.define("heteroclinic", ["starts and ends in ", "different", " equilibria"], 1)
+        self.define("homoclinic", ["starts and ends in ", "the same", " equilibrium"], 1)
 
         self.thanks()
 
